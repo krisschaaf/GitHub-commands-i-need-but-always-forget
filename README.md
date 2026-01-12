@@ -43,6 +43,34 @@ git restore --staged .
 git add .
 ```
 
+### Squash last 2 commits:
+1. Start an interactive rebase:
+   ```bash
+   git rebase -i HEAD~2
+   ```
+   this opens the editor with something like this:
+   ```
+   pick commit_hash_1 Revert "fix: ..."
+   pick commit_hash_2 Reapply "chore: ..."
+   ```
+2. Squash the second commit into the first:
+
+   change it to:
+   ```
+   pick commit_hash_1 Revert "fix: ..."
+   squash commit_hash_2 Reapply "chore: ..."
+   ```
+   save and close the editor
+3. Set the new commit message
+4. Verify the result by checking your history:
+   ```bash
+   git log --oneline -3
+   ```
+5. Push
+   ```bash
+   git push --force-with-lease
+   ```
+   
 ### Install Git LFS:
 1. Install with Homebrew:
    ```bash
